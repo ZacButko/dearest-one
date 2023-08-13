@@ -2,7 +2,7 @@ import Card from "@/components/home/card";
 import Balancer from "react-wrap-balancer";
 import ComponentGrid from "@/components/home/component-grid";
 import Image from "next/image";
-import { Button } from "@radix-ui/themes";
+import { SignInButton } from "@/components/layout/sign-in-modal";
 
 export default async function Home() {
   return (
@@ -26,9 +26,7 @@ export default async function Home() {
           className="mx-auto mt-6 flex animate-fade-up items-center justify-center space-x-5 opacity-0"
           style={{ animationDelay: "0.3s", animationFillMode: "forwards" }}
         >
-          <Button size="3" variant="surface">
-            Sign In
-          </Button>
+          <SignInButton size="3" variant="surface" />
         </div>
       </div>
       <div className="my-10 grid w-full max-w-screen-xl animate-fade-up grid-cols-1 gap-5 px-5 md:grid-cols-3 xl:px-0">

@@ -94,11 +94,12 @@ export function useSignInModal() {
 export const SignInButton = (
   props: ComponentPropsWithoutRef<typeof BaseButton>,
 ) => {
-  // const { SignInModal, setShowSignInModal } = useSignInModal();
   return (
     <>
       {/* <SignInModal /> */}
-      <Button {...props}>Sign In</Button>
+      <Button {...props} onClick={() => signIn("google")}>
+        Sign In
+      </Button>
     </>
   );
 };
