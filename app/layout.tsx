@@ -5,20 +5,22 @@ import { sfPro, inter } from "./fonts";
 import Nav from "@/components/layout/nav";
 import Footer from "@/components/layout/footer";
 import { Suspense } from "react";
+import { Theme } from "@radix-ui/themes";
+import "@radix-ui/themes/styles.css";
 
 export const metadata = {
-  title: "Precedent - Building blocks for your Next.js project",
+  title: "Dearast One",
   description:
-    "Precedent is the all-in-one solution for your Next.js project. It includes a design system, authentication, analytics, and more.",
+    "Daily support and motivation, personalied for you, the dearest one.",
   twitter: {
     card: "summary_large_image",
-    title: "Precedent - Building blocks for your Next.js project",
+    title: "Dearest One - Daily support and motivation.",
     description:
-      "Precedent is the all-in-one solution for your Next.js project. It includes a design system, authentication, analytics, and more.",
-    creator: "@steventey",
+      "Dearest One is the app that's all about you. Track your daily habits. Get motivated. Feel loved.",
+    creator: "@ZacButko",
   },
-  metadataBase: new URL("https://precedent.dev"),
-  themeColor: "#FFF",
+  metadataBase: new URL("https://dearest.one"),
+  themeColor: "#0085FB",
 };
 
 export default async function RootLayout({
@@ -29,16 +31,18 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={cx(sfPro.variable, inter.variable)}>
-        <div className="fixed h-screen w-full bg-gradient-to-br from-indigo-50 via-white to-cyan-100" />
-        <Suspense fallback="...">
-          {/* @ts-expect-error Server Component */}
-          <Nav />
-        </Suspense>
-        <main className="flex min-h-screen w-full flex-col items-center justify-center py-32">
-          {children}
-        </main>
-        <Footer />
-        <Analytics />
+        <Theme appearance="dark" accentColor="blue" grayColor="slate">
+          <div className="fixed h-screen w-full bg-gradient-to-br from-indigo-50 via-white to-cyan-100" />
+          <Suspense fallback="...">
+            {/* @ts-expect-error Server Component */}
+            <Nav />
+          </Suspense>
+          <main className="flex min-h-screen w-full flex-col items-center justify-center py-32">
+            {children}
+          </main>
+          <Footer />
+          <Analytics />
+        </Theme>
       </body>
     </html>
   );
