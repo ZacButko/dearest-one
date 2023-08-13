@@ -1,0 +1,10 @@
+version: "3"
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: dearest-one-local
+      POSTGRES_PASSWORD: test_password
+    ports:
+      - 6543:5432
