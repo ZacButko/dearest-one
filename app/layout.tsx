@@ -32,7 +32,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={cx(sfPro.variable, inter.variable)}>
         <Theme appearance="dark" accentColor="blue" grayColor="slate">
-          <div className="fixed h-screen w-full bg-gradient-to-br from-indigo-50 via-white to-cyan-100" />
+          <div className="fixed h-screen w-full bg-gradient-to-br from-sky-950 via-indigo-950 to-indigo-900" />
           <Suspense fallback="...">
             {/* @ts-expect-error Server Component */}
             <Nav />
