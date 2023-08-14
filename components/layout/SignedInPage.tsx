@@ -1,13 +1,11 @@
 import "@/app/globals.css";
 import { Analytics } from "@vercel/analytics/react";
-import cx from "classnames";
-import { sfPro, inter } from "@/app/fonts";
-import Nav from "@/components/layout/nav";
 import Footer from "@/components/layout/footer";
-import { ReactNode, Suspense } from "react";
+import { ReactNode } from "react";
 import { Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
 import Head from "next/head";
+import { ClientNav } from "./client-nav";
 
 export const metadata = {
   title: "Dearast One",
@@ -29,8 +27,9 @@ const SignedInPage = ({ children }: { children: ReactNode }) => {
     <>
       <Theme appearance="dark" accentColor="blue" grayColor="slate">
         <Head>
-          <title>D1 - About</title>
+          <title>Dearest One</title>
         </Head>
+        <ClientNav />
         <div className="fixed -z-10 h-screen w-full bg-gradient-to-br from-sky-900 via-sky-800 to-sky-900"></div>
         <main className="flex min-h-screen w-full flex-col items-center justify-center py-32 text-slate-100">
           {children}
