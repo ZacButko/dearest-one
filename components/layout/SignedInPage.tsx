@@ -22,12 +22,18 @@ export const metadata = {
   themeColor: "#0085FB",
 };
 
-const SignedInPage = ({ children }: { children: ReactNode }) => {
+const SignedInPage = ({
+  children,
+  title = "Dearest One",
+}: {
+  children: ReactNode;
+  title?: string;
+}) => {
   return (
     <>
       <Theme appearance="dark" accentColor="blue" grayColor="slate">
         <Head>
-          <title>Dearest One</title>
+          <title>{title}</title>
         </Head>
         <ClientNav />
         <div className="fixed -z-10 h-screen w-full bg-gradient-to-br from-sky-900 via-sky-800 to-sky-900"></div>

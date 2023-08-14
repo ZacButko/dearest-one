@@ -1,17 +1,15 @@
 import SignedInPage from "@/components/layout/SignedInPage";
-import { useSession } from "next-auth/react";
-import { FC, ReactNode } from "react";
+import { ReactNode } from "react";
 import { NextPageWithLayout } from "./_app";
-import Head from "next/head";
 
 const sections = [
   {
     title: "Introduction",
-    content: `These Website Standard Terms And Conditions (these “Terms” or these
-        “Website Standard Terms And Conditions”) contained herein on this webpage,
+    content: `These Website Standard Privacy Policy (this Policy or this
+        “Website Standard Privacy Policy”) contained herein on this webpage,
         shall govern your use of this website, including all pages within this
-        website (collectively referred to herein below as this “Website”). These
-        Terms apply in full force and effect to your use of this Website and by
+        website (collectively referred to herein below as this “Website”). This
+        Policy apply in full force and effect to your use of this Website and by
         using this Website, you expressly accept all terms and conditions contained
         herein in full. You must not use this Website, if you have any objection to
         any of these Website Standard Terms And Conditions.`,
@@ -145,7 +143,7 @@ const TOS: NextPageWithLayout = () => {
   return (
     <div className="prose text-slate-100 lg:prose-xl">
       <h1 className="text-center text-slate-100">
-        Dearest One Website Standard Terms and Conditions
+        Dearest One Website Data & Privcy Policy
       </h1>
       <div className="flex flex-col gap-16">
         {sections.map((s, index) => (
@@ -160,7 +158,7 @@ const TOS: NextPageWithLayout = () => {
 };
 
 TOS.getLayout = function getLayout(page: ReactNode) {
-  return <SignedInPage title="D1 - Terms of Service">{page}</SignedInPage>;
+  return <SignedInPage title="D1 - Privacy Policy">{page}</SignedInPage>;
 };
 
 export default TOS;
