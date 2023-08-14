@@ -1,6 +1,7 @@
 import SignedInPage from "@/components/layout/SignedInPage";
 import { ReactNode } from "react";
 import { NextPageWithLayout } from "./_app";
+import Balancer from "react-wrap-balancer";
 
 const sections = [
   {
@@ -237,7 +238,7 @@ const TOS: NextPageWithLayout = () => {
   return (
     <div className="prose text-slate-100 lg:prose-xl">
       <h1 className="text-center text-slate-100">
-        Dearest One Website Data & Privcy Policy
+        <Balancer>Dearest One Website Data & Privcy Policy</Balancer>
       </h1>
       <div className="flex flex-col gap-16">
         {sections.map((s, index) => (

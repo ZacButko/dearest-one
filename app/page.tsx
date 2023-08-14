@@ -3,8 +3,15 @@ import Balancer from "react-wrap-balancer";
 import ComponentGrid from "@/components/home/component-grid";
 import Image from "next/image";
 import { SignInButton } from "@/components/layout/sign-in-modal";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/route";
 
 export default async function Home() {
+  const session = await getServerSession(authOptions);
+
+  if (session?.user) {
+    return <div>boop</div>;
+  }
   return (
     <>
       <div className="z-10 w-full max-w-xl px-5 xl:px-0">
