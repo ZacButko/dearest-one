@@ -10,7 +10,7 @@ export default async function Home() {
   const session = await getServerSession(authOptions);
 
   if (session?.user) {
-    return <div>boop</div>;
+    return <>Hello {session.user.email}</>;
   }
   return (
     <>

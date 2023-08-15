@@ -1,9 +1,6 @@
-import SignedInPage from "@/components/layout/SignedInPage";
-import { ReactNode } from "react";
-import { NextPageWithLayout } from "./_app";
 import Link from "next/link";
 
-const About: NextPageWithLayout = () => {
+const About = () => {
   return (
     <div className="prose text-slate-100 lg:prose-xl">
       <h1 className="text-slate-100">About Dearest One</h1>
@@ -48,10 +45,6 @@ const About: NextPageWithLayout = () => {
       </p>
     </div>
   );
-};
-
-About.getLayout = function getLayout(page: ReactNode) {
-  return <SignedInPage title="D1 - About">{page}</SignedInPage>;
 };
 
 export default About;

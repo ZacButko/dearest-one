@@ -7,6 +7,10 @@ import Footer from "@/components/layout/footer";
 import { Suspense } from "react";
 import { Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
+import { Providers } from "./providers";
+import Background, {
+  loggedOutBackground,
+} from "@/components/layout/background";
 
 export const metadata = {
   title: "Dearast One",
@@ -32,16 +36,24 @@ export default async function RootLayout({
     <html lang="en">
       <body className={cx(sfPro.variable, inter.variable)}>
         <Theme appearance="dark" accentColor="blue" grayColor="slate">
-          <div className="fixed -z-10 h-screen w-full bg-gradient-to-br from-sky-950 via-blue-950 to-sky-950" />
-          <Suspense fallback="...">
-            {/* @ts-expect-error Server Component */}
-            <Nav />
-          </Suspense>
-          <main className="flex min-h-screen w-full flex-col items-center justify-center py-32">
-            {children}
-          </main>
-          <Footer />
-          <Analytics />
+          <Providers>
+            <Suspense fallback={loggedOutBackground}>
+              {/* @ts-expect-error Server Component */}
+              <Background />
+            </Suspense>
+            <Suspense fallback="...">
+              {/* @ts-expect-error Server Component */}
+              <Nav />
+            </Suspense>
+            <main className="flex min-h-screen w-full flex-col items-center justify-center py-32">
+              {children}
+            </main>
+            <Suspense>
+              {/* @ts-expect-error Server Component */}
+              <Footer />
+            </Suspense>
+            <Analytics />
+          </Providers>
         </Theme>
       </body>
     </html>
