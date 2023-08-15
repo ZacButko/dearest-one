@@ -5,12 +5,34 @@ import Image from "next/image";
 import { SignInButton } from "@/components/layout/sign-in-modal";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
+import ActivityCard from "@/components/home/activity-card";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
 
   if (session?.user) {
-    return <>Hello {session.user.email}</>;
+    return (
+      <>
+        <div className="z-10 w-full max-w-xl px-5 xl:px-0">
+          <h1
+            className="animate-fade-up bg-gradient-to-br from-white to-stone-200 bg-clip-text text-center font-display text-2xl font-bold tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm md:text-7xl md:leading-[5rem]"
+            style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}
+          >
+            <Balancer>Welcome back</Balancer>
+          </h1>
+        </div>
+        <div className="my-10 grid w-full max-w-screen-xl animate-fade-up grid-cols-1 gap-5 px-5 md:grid-cols-3 xl:px-0">
+          {features.map(({ activityTitle, destination, icon }) => (
+            <ActivityCard
+              key={activityTitle}
+              title={activityTitle}
+              destination={destination}
+              icon={icon}
+            />
+          ))}
+        </div>
+      </>
+    );
   }
   return (
     <>
@@ -60,17 +82,29 @@ export default async function Home() {
 const features = [
   {
     title: "Track Water Intake",
+    activityTitle: "Log Water",
     description: "Track the water you drink throughout the day.",
     demo: (
       <div className="flex items-center justify-center space-x-20">
         <Image
-          alt="Auth.js logo"
+          alt="water.js logo"
           src="/do-logo-t-bg.png"
           width={100}
           height={100}
         />
       </div>
     ),
+    icon: (
+      <div className="flex items-center justify-center space-x-20">
+        <Image
+          alt="water.js logo"
+          src="/do-logo-t-bg.png"
+          width={90}
+          height={90}
+        />
+      </div>
+    ),
     large: false,
+    destination: "/water",
   },
 ];
