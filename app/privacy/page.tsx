@@ -1,7 +1,10 @@
-import SignedInPage from "@/components/layout/SignedInPage";
 import { ReactNode } from "react";
-import { NextPageWithLayout } from "./_app";
 import Balancer from "react-wrap-balancer";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "D1 - Privacy Policy",
+};
 
 const sections = [
   {
@@ -234,7 +237,7 @@ const SectionContent = ({ content }: { content: ReactNode }) => {
   return <div>{content}</div>;
 };
 
-const TOS: NextPageWithLayout = () => {
+const TOS = () => {
   return (
     <div className="prose text-slate-100 lg:prose-xl">
       <h1 className="text-center text-slate-100">
@@ -250,10 +253,6 @@ const TOS: NextPageWithLayout = () => {
       </div>
     </div>
   );
-};
-
-TOS.getLayout = function getLayout(page: ReactNode) {
-  return <SignedInPage title="D1 - Privacy Policy">{page}</SignedInPage>;
 };
 
 export default TOS;
