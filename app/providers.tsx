@@ -4,6 +4,10 @@ import { SWRConfig } from "swr";
 import fetchJson from "@/lib/fetchJson";
 import { SessionProvider } from "next-auth/react";
 import { ReactNode } from "react";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { ThemeProvider } from "@mui/material";
+import { muiTheme } from "@/lib/muiTheme";
 
 export function Providers({ children }: { children: ReactNode }) {
   return (
@@ -15,7 +19,11 @@ export function Providers({ children }: { children: ReactNode }) {
         },
       }}
     >
-      <SessionProvider>{children}</SessionProvider>
+      <SessionProvider>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <ThemeProvider theme={muiTheme}>{children}</ThemeProvider>
+        </LocalizationProvider>
+      </SessionProvider>
     </SWRConfig>
   );
 }
