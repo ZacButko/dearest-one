@@ -10,12 +10,12 @@ export async function POST(request: Request) {
   }
 
   const body = await request.json();
-
   const { timestamp, amountEntered, unitUsedId } = body;
 
   if (!timestamp || !amountEntered || !unitUsedId) {
     return NextResponse.error();
   }
+
   const fluidUnit = await prisma.fluidUnit.findUnique({
     where: { id: unitUsedId },
   });
@@ -24,7 +24,7 @@ export async function POST(request: Request) {
 
   const waterLog = await prisma.waterLog.create({
     data: {
-      timestamp,
+      timestamp: new Date(timestamp),
       amountEntered,
       unitUsedId,
       amountML: amountEntered * fluidUnit.convertToML,

@@ -15,17 +15,37 @@ import {
 } from "@mui/material";
 
 const initialWaterFormData = {
-  timestamp: new Date().getTime(),
+  timestamp: dayjs().valueOf(),
   amountEntered: "0",
-  unitUsed: 3,
+  unitUsedId: 3,
 };
 
 const WaterForm = ({ fluidUnits }: { fluidUnits: Array<FluidUnit> }) => {
   const [state, setState] = useState(initialWaterFormData);
+  const [errors, setErrors] = useState<{ amountEntered?: boolean }>({});
 
   const onSubmit = (event: FormEvent) => {
     event.preventDefault();
-    console.log({ state });
+    const amount = state.amountEntered;
+    if (amount && !isNaN(parseInt(amount)) && parseInt(amount) !== 0) {
+      setErrors({});
+      const data = {
+        amountEntered: parseInt(amount),
+        timestamp: state.timestamp,
+        unitUsedId: state.unitUsedId,
+      };
+      const submit = async () => {
+        const res = await fetch("/api/water", {
+          method: "POST",
+          body: JSON.stringify(data),
+        });
+        const body = res.json();
+        console.log("body", body);
+      };
+      void submit();
+    } else {
+      setErrors({ amountEntered: true });
+    }
   };
 
   const updateState = (key: string, value: any) => {
@@ -46,15 +66,16 @@ const WaterForm = ({ fluidUnits }: { fluidUnits: Array<FluidUnit> }) => {
           }
           label="Amount"
           type="tel"
+          error={errors.amountEntered}
         />
         <FormControl>
-          <InputLabel id="unitUsed">Units</InputLabel>
+          <InputLabel id="unitUsedId">Units</InputLabel>
           <Select
-            id="unitUsed"
+            id="unitUsedId"
             label="Units"
-            defaultValue={`${state.unitUsed}`}
+            defaultValue={`${state.unitUsedId}`}
             onChange={(e: SelectChangeEvent<string>) =>
-              updateState("unitUsed", e.target.value)
+              updateState("unitUsedId", e.target.value)
             }
           >
             {fluidUnits.map((u) => (
@@ -80,10 +101,20 @@ const WaterForm = ({ fluidUnits }: { fluidUnits: Array<FluidUnit> }) => {
         />
         <MobileTimePicker
           label="Time"
-          defaultValue={dayjs(state.timestamp)}
           onChange={(value) => updateState("timestamp", value?.valueOf())}
           value={dayjs(state.timestamp)}
         />
+        <Button
+          size="2"
+          variant="surface"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            updateState("timestamp", dayjs().valueOf());
+          }}
+        >
+          Now
+        </Button>
       </div>
     </form>
   );
