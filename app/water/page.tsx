@@ -27,7 +27,7 @@ export default async function Water() {
   const now = new Date();
   return (
     <div className="flex flex-col gap-8 px-2 md:px-16">
-      <WaterProvider fluidUnits={fluidUnits} waterLog={waterLog}>
+      <WaterProvider fluidUnits={fluidUnits} initialWaterLog={waterLog}>
         <h1 className="text-4xl text-slate-100">Water</h1>
         <div className="grid grid-cols-1 md:grid-cols-2">
           <div className="flex flex-col gap-4">

@@ -36,9 +36,11 @@ export const WaterTable = () => {
   return (
     <div>
       Water drank today
-      {logsToShow.map((l) => (
-        <WaterRecord log={l} key={l.id} />
-      ))}
+      <div className="flex flex-col gap-2">
+        {logsToShow.map((l) => (
+          <WaterRecord log={l} key={l.id} />
+        ))}
+      </div>
     </div>
   );
 };

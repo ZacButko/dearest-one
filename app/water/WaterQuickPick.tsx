@@ -1,10 +1,10 @@
 "use client";
 import Image from "next/image";
-import { useFluidUnits } from "./provider";
+import { useFluidUnits, useWaterContext } from "./provider";
 import { FluidUnit } from "@prisma/client";
 import pluralize from "pluralize";
 import { BsCup, BsCupStraw } from "react-icons/bs";
-const iconSize = "48";
+import dayjs from "dayjs";
 
 const WaterQuickPick = ({
   amount,
@@ -14,12 +14,33 @@ const WaterQuickPick = ({
   fluidUnitId: number;
 }) => {
   const fluidUnits = useFluidUnits();
+  const { addWaterLog } = useWaterContext();
   const unit = fluidUnits.find((fl) => fl.id === fluidUnitId) as FluidUnit;
   const totalML = amount * unit.convertToML;
   const Icon = totalML <= 473 ? BsCup : BsCupStraw;
 
+  const onSubmit = () => {
+    const data = {
+      amountEntered: amount,
+      timestamp: dayjs().valueOf(),
+      unitUsedId: fluidUnitId,
+    };
+    const submit = async () => {
+      const res = await fetch("/api/water", {
+        method: "POST",
+        body: JSON.stringify(data),
+      });
+      const body = await res.json();
+      addWaterLog(body);
+    };
+    void submit();
+  };
+
   return (
-    <div className=" flex basis-36 flex-col items-center rounded-xl fill-white stroke-white p-6 hover:bg-sky-700">
+    <div
+      className=" flex basis-36 flex-col items-center rounded-xl fill-white stroke-white p-6 hover:bg-sky-700"
+      onClick={onSubmit}
+    >
       <div className="flex h-10 w-10 items-stretch">
         <Icon height="100%" width="100%" size="100%" />
       </div>
