@@ -13,6 +13,7 @@ import {
   SelectChangeEvent,
   TextField,
 } from "@mui/material";
+import { useFluidUnits } from "./provider";
 
 const initialWaterFormData = {
   timestamp: dayjs().valueOf(),
@@ -20,7 +21,8 @@ const initialWaterFormData = {
   unitUsedId: 3,
 };
 
-const WaterForm = ({ fluidUnits }: { fluidUnits: Array<FluidUnit> }) => {
+const WaterForm = () => {
+  const fluidUnits = useFluidUnits();
   const [state, setState] = useState(initialWaterFormData);
   const [errors, setErrors] = useState<{ amountEntered?: boolean }>({});
 
